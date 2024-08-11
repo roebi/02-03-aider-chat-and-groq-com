@@ -2,7 +2,7 @@
 
 remark: i have a windows machine.
 
-## alread installed a old python version ?
+## already installed a old python version ?
 
 remark: i had already installed a old python version
 
