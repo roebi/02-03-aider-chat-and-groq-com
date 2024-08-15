@@ -162,7 +162,7 @@ in this bash in Visual Studio Code in the directory of your working project
 // aider help
 aider --help
 // run aider with Groq and i.e. Lama/3 :
-aider --model llama-3.1-70b-versatile
+aider --model groq/llama-3.1-70b-versatile
 ```
 
 answer in the same git bash terminal:
