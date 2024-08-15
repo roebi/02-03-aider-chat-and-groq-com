@@ -16,7 +16,7 @@ later I got this error message:
 
 here the tip: 
 
-first remove directory C:\Users\<username>\.local\pipx
+first remove directory ~\\.local\pipx
 
 ## install python latest release
 
@@ -47,7 +47,7 @@ py -m pip install --user pipx
 // if installed from python.org
 cd ~/AppData/Roaming/Python/Python312/Scripts
 // or if installed from Microsoft Store
-cd C:\Users\<username>\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_xxx\LocalCache\local-packages\Python312\Scripts
+cd ~\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_xxx\LocalCache\local-packages\Python312\Scripts
 // this add this directory to the environment variable PATH
 pipx.exe ensurepath
 ```
@@ -77,6 +77,51 @@ pipx.exe install aider-chat
 // show installed aider-chat and some additional infos about some directories
 pipx.exe list
 ```
+
+## upgrade aider with pipx
+
+if at start of aider --...
+
+is asking to install a updated version of aider this way:
+```
+Newer aider version v0.nn.n is available. To upgrade, run: ... pip ...
+```
+
+then anser
+```
+Run pip install?
+```
+with 'n' (no).
+
+Upgrade it with pipx:
+
+in a new git bash
+```
+pipx list
+pipx upgrade aider-chat
+```
+
+it answer with
+```
+⚠️  Overwriting file ~\.local\bin\aider.exe with ~\pipx\venvs\aider-chat\Scripts\aider.exe
+upgraded package aider-chat from 0.nn.n to 0.nn.n (location: ~\pipx\venvs\aider-chat)
+```
+
+with
+```
+pipx list
+```
+you see the upgraded aider-chat
+
+## initialize interactive help for aider with pipx
+
+TODO: figure out how to install with pipx
+
+does not work:
+```
+pipx install aider-chat[help] --extra-index-url https://download.pytorch.org/whl/cpu
+```
+
 ## connect aider-chat with a llm via groq.com
 
 get your API key from
@@ -96,26 +141,37 @@ in the directory of your working project
 
 make sure you have a git repo there
 
+then prepare a .env file with content similar to .env.example :
+
+```
+GROQ_API_KEY=<yourGroqKey>
+```
+this replaces the manual need of
+```
+export GROQ_API_KEY=<yourGroqKey> each time
+```
+
 open Visual Studio Code and open the directory of your working project
 
 in Visual Studio Code open a terminal - i open a bash
 
 in this bash in Visual Studio Code in the directory of your working project
 ```
-export GROQ_API_KEY=<yourGroqKey>
+// no more export, key is in .env file
+// export GROQ_API_KEY=<yourGroqKey>
 // aider help
 aider --help
 // run aider with Groq and i.e. Lama/3 :
-aider --model groq/llama3-70b-8192
+aider --model llama-3.1-70b-versatile
 ```
 
 answer in the same git bash terminal:
 ```
 Add .aider* to .gitignore (recommended)? y
 Added .aider* to .gitignore
-Aider v0.48.1
-Models: groq/llama3-70b-8192 with diff edit format, weak model groq/llama3-8b-8192
-Git repo: .git with 1 files
+Aider v0.49.1
+Models: Model: groq/llama-3.1-70b-versatile with diff edit format
+Git repo: .git with 3 files
 Repo-map: disabled
 VSCode terminal detected, pretty output has been disabled.
 Use /help <question> for help, run "aider --help" to see cmd line args
